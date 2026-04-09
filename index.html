@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy Resume — Create in Seconds</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F5F2;
+    --surface: #FFFFFF;
+    --ink: #1A1A1A;
+    --ink-muted: #6B6B6B;
+    --accent: #2D5BE3;
+    --accent-light: #EEF2FF;
+    --border: #E5E2DD;
+    --success: #16A34A;
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,245,242,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--ink);
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 8px; align-items: center; }
+  .nav-links a {
+    font-size: 0.875rem; font-weight: 500;
+    color: var(--ink-muted); text-decoration: none;
+    padding: 6px 14px; border-radius: 8px;
+    transition: all 0.15s;
+    cursor: pointer;
+  }
+  .nav-links a:hover { background: var(--border); color: var(--ink); }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    border: none; padding: 8px 18px;
+    border-radius: 8px; font-size: 0.875rem;
+    font-weight: 500; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-outline {
+    background: transparent; color: var(--ink);
+    border: 1.5px solid var(--border); padding: 8px 18px;
+    border-radius: 8px; font-size: 0.875rem;
+    font-weight: 500; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    max-width: 860px; margin: 0 auto;
+    padding: 80px 32px 60px;
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--accent-light); color: var(--accent);
+    font-size: 0.78rem; font-weight: 600;
+    padding: 5px 12px; border-radius: 99px;
+    margin-bottom: 24px; letter-spacing: 0.3px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    line-height: 1.1; letter-spacing: -1.5px;
+    margin-bottom: 20px;
+  }
+  .hero h1 em { color: var(--accent); font-style: italic; }
+  .hero p {
+    font-size: 1.05rem; color: var(--ink-muted);
+    max-width: 520px; margin: 0 auto 36px;
+    line-height: 1.7; font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .hero-stats {
+    display: flex; gap: 32px; justify-content: center;
+    margin-top: 52px; flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem; color: var(--ink);
+  }
+  .stat-label { font-size: 0.8rem; color: var(--ink-muted); margin-top: 2px; }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    height: 1px; background: var(--border);
+    max-width: 900px; margin: 0 auto;
+  }
+
+  /* ── SECTION TITLES ── */
+  .section-header {
+    text-align: center;
+    padding: 64px 32px 40px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .section-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem; letter-spacing: -0.8px;
+    margin-bottom: 10px;
+  }
+  .section-header p { font-size: 0.95rem; color: var(--ink-muted); line-height: 1.6; }
+
+  /* ── TEMPLATE TABS ── */
+  .tabs-wrap { padding: 0 32px 16px; max-width: 1100px; margin: 0 auto; }
+  .tabs {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    border-bottom: 1.5px solid var(--border);
+    padding-bottom: 0;
+  }
+  .tab-btn {
+    background: none; border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem; font-weight: 500;
+    color: var(--ink-muted); cursor: pointer;
+    padding: 10px 18px;
+    border-bottom: 2.5px solid transparent;
+    margin-bottom: -1.5px;
+    transition: all 0.15s;
+  }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ── TEMPLATE GRID ── */
+  .template-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    padding: 24px 32px 64px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .template-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .template-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(45,91,227,0.1);
+  }
+  .template-preview {
+    height: 200px;
+    padding: 16px;
+    display: flex; flex-direction: column; gap: 7px;
+    background: #FAFAFA;
+    pointer-events: none;
+  }
+  .preview-header { display: flex; gap: 10px; align-items: center; }
+  .preview-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, #C7D2FE, #818CF8);
+    flex-shrink: 0;
+  }
+  .preview-name-block { flex: 1; }
+  .preview-line {
+    height: 6px; border-radius: 4px; background: #E5E7EB;
+    margin-bottom: 4px;
+  }
+  .preview-line.dark { background: #374151; }
+  .preview-line.accent { background: var(--accent); opacity: 0.5; }
+  .preview-line.short { width: 55%; }
+  .preview-line.med { width: 75%; }
+  .preview-line.full { width: 100%; }
+  .preview-line.thin { height: 4px; }
+  .preview-divider { height: 1px; background: #E5E7EB; margin: 2px 0; }
+  .preview-section-title { height: 5px; width: 40%; border-radius: 4px; background: #374151; }
+  .preview-cols { display: flex; gap: 8px; }
+  .preview-col { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+  .preview-sidebar {
+    display: flex; gap: 8px;
+  }
+  .preview-left { width: 35%; background: #374151; border-radius: 4px; padding: 6px; display: flex; flex-direction: column; gap: 5px; }
+  .preview-right { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+  .preview-line.white { background: rgba(255,255,255,0.35); }
+  .template-info {
+    padding: 14px 16px;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .template-name { font-size: 0.875rem; font-weight: 600; }
+  .template-tag {
+    font-size: 0.72rem; font-weight: 500;
+    background: var(--accent-light); color: var(--accent);
+    padding: 2px 8px; border-radius: 99px;
+  }
+  .tag-bio { background: #FEF3C7; color: #92400E; }
+  .tag-personal { background: #F0FDF4; color: #166534; }
+  .tag-cv { background: #FAF5FF; color: #6B21A8; }
+  .tag-student { background: #FFF7ED; color: #9A3412; }
+
+  /* ── EDITOR SECTION ── */
+  #editor-section {
+    display: none;
+    padding: 0 32px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  #editor-section.visible { display: block; }
+
+  .editor-topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 0 24px;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .editor-topbar h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+  }
+  .editor-actions { display: flex; gap: 8px; }
+
+  .editor-layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .editor-form {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 18px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .form-section-title {
+    font-size: 0.72rem; font-weight: 600;
+    color: var(--ink-muted); letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: -8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group label { font-size: 0.8rem; font-weight: 500; color: var(--ink-muted); }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    color: var(--ink);
+    background: var(--bg);
+    transition: border-color 0.15s;
+    resize: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #fff;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .editor-preview {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .preview-toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .preview-toolbar span { font-size: 0.8rem; color: var(--ink-muted); font-weight: 500; }
+  .preview-toolbar-actions { display: flex; gap: 6px; }
+  .doc-preview-wrap {
+    padding: 24px;
+    background: #E8E6E3;
+    min-height: 500px;
+    display: flex; justify-content: center;
+  }
+
+  /* ── ACTUAL RESUME DOCUMENT ── */
+  .doc-a4 {
+    width: 100%;
+    max-width: 595px;
+    background: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  /* Template 1 — Classic */
+  .resume-classic .resume-head {
+    padding: 22px 24px 16px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .resume-classic .r-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px; letter-spacing: -0.5px; line-height: 1;
+    margin-bottom: 3px;
+  }
+  .resume-classic .r-title { font-size: 10px; color: #555; font-weight: 300; letter-spacing: 1px; text-transform: uppercase; }
+  .resume-classic .r-contact {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .resume-classic .r-contact span { font-size: 9px; color: #666; }
+  .resume-classic .r-body { padding: 16px 24px; display: flex; gap: 20px; }
+  .resume-classic .r-left { width: 38%; border-right: 1px solid #E5E5E5; padding-right: 16px; }
+  .resume-classic .r-right { flex: 1; }
+  .r-sec { margin-bottom: 14px; }
+  .r-sec-title {
+    font-size: 8px; font-weight: 600; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--accent);
+    border-bottom: 1px solid #E5E5E5; padding-bottom: 3px;
+    margin-bottom: 7px;
+  }
+  .r-item { margin-bottom: 8px; }
+  .r-item-head { display: flex; justify-content: space-between; margin-bottom: 2px; }
+  .r-item-title { font-weight: 600; font-size: 9.5px; }
+  .r-item-date { font-size: 8px; color: #888; }
+  .r-item-sub { font-size: 8.5px; color: #555; margin-bottom: 2px; }
+  .r-item-desc { font-size: 8px; color: #666; line-height: 1.5; }
+  .r-skill-list { display: flex; flex-direction: column; gap: 5px; }
+  .r-skill { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .r-skill-name { font-size: 8.5px; white-space: nowrap; }
+  .r-skill-bar { flex: 1; height: 4px; background: #EEE; border-radius: 2px; }
+  .r-skill-fill { height: 100%; background: var(--accent); border-radius: 2px; }
+  .r-tag { display: inline-block; background: #F0F4FF; color: var(--accent); font-size: 7.5px; padding: 2px 6px; border-radius: 3px; margin: 2px 2px 0 0; font-weight: 500; }
+
+  /* Template 2 — Modern Sidebar */
+  .resume-modern .r-sidebar { display: flex; }
+  .resume-modern .r-side-col { width: 38%; background: #1A1A2E; color: #fff; padding: 20px 16px; }
+  .resume-modern .r-main-col { flex: 1; padding: 20px 16px; }
+  .resume-modern .r-avatar {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: linear-gradient(135deg, #667EEA, #764BA2);
+    margin: 0 auto 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px; color: #fff;
+  }
+  .resume-modern .r-name { font-family: 'DM Serif Display', serif; font-size: 16px; text-align: center; color: #fff; margin-bottom: 2px; line-height: 1.1; }
+  .resume-modern .r-title { font-size: 8px; text-align: center; color: rgba(255,255,255,0.6); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+  .resume-modern .r-sec-title { font-size: 7.5px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 3px; margin-bottom: 7px; }
+  .resume-modern .r-contact-item { font-size: 8px; color: rgba(255,255,255,0.75); margin-bottom: 4px; }
+  .resume-modern .r-skill-list .r-skill-name { color: rgba(255,255,255,0.85); }
+  .resume-modern .r-skill-list .r-skill-bar { background: rgba(255,255,255,0.15); }
+  .resume-modern .r-skill-list .r-skill-fill { background: #667EEA; }
+  .resume-modern .r-item-title { font-size: 9.5px; font-weight: 600; }
+  .resume-modern .r-sec-title-main { font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #1A1A2E; border-bottom: 2px solid #667EEA; padding-bottom: 3px; margin-bottom: 8px; }
+
+  /* Template 3 — Minimal */
+  .resume-minimal { padding: 28px 28px; }
+  .resume-minimal .r-name { font-family: 'DM Serif Display', serif; font-size: 22px; letter-spacing: -0.5px; }
+  .resume-minimal .r-title { font-size: 10px; color: #888; font-weight: 300; letter-spacing: 0.5px; margin-top: 2px; }
+  .resume-minimal .r-contact { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; margin-bottom: 18px; }
+  .resume-minimal .r-contact span { font-size: 8.5px; color: #666; }
+  .resume-minimal .r-sec-title { font-size: 9px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: #111; margin-bottom: 8px; margin-top: 14px; }
+  .resume-minimal .r-line { height: 1px; background: #E5E5E5; margin-bottom: 10px; }
+
+  /* Bio Data Template */
+  .biodata-doc { padding: 24px; }
+  .biodata-doc .bd-title { font-family: 'DM Serif Display', serif; font-size: 18px; text-align: center; margin-bottom: 2px; }
+  .biodata-doc .bd-sub { font-size: 9px; text-align: center; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+  .biodata-doc .bd-photo-row { display: flex; gap: 16px; margin-bottom: 14px; }
+  .biodata-doc .bd-photo { width: 70px; height: 80px; background: linear-gradient(135deg, #E0E7FF, #C7D2FE); border-radius: 4px; border: 1px solid #C7D2FE; display: flex; align-items: center; justify-content: center; font-size: 8px; color: #4F46E5; font-weight: 600; flex-shrink: 0; }
+  .biodata-doc .bd-name-block { flex: 1; }
+  .biodata-doc .bd-name { font-family: 'DM Serif Display', serif; font-size: 16px; margin-bottom: 3px; }
+  .biodata-doc table { width: 100%; border-collapse: collapse; }
+  .biodata-doc td { font-size: 8.5px; padding: 4px 6px; }
+  .biodata-doc td:first-child { width: 38%; font-weight: 600; color: #444; }
+  .biodata-doc tr:nth-child(even) td { background: #FAFAFA; }
+  .biodata-doc .bd-section-head { font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; background: #F0F4FF; color: var(--accent); padding: 4px 6px; }
+
+  /* Personal Info Sheet */
+  .personal-doc { padding: 22px; }
+  .personal-doc .pd-header { background: linear-gradient(135deg, #1A1A2E, #2D5BE3); padding: 16px; border-radius: 6px; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+  .personal-doc .pd-avatar { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 18px; color: #fff; }
+  .personal-doc .pd-name { font-family: 'DM Serif Display', serif; font-size: 16px; color: #fff; }
+  .personal-doc .pd-id { font-size: 8px; color: rgba(255,255,255,0.6); }
+  .personal-doc .pd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+  .personal-doc .pd-field { }
+  .personal-doc .pd-label { font-size: 7.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: #888; margin-bottom: 2px; }
+  .personal-doc .pd-value { font-size: 9px; color: #111; border-bottom: 1px solid #E5E5E5; padding-bottom: 3px; }
+
+  /* ── WHY SECTION ── */
+  .why-section {
+    max-width: 900px; margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 0;
+  }
+  .why-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    transition: border-color 0.2s;
+  }
+  .why-card:hover { border-color: var(--accent); }
+  .why-icon {
+    width: 36px; height: 36px;
+    background: var(--accent-light);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+  .why-card h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; }
+  .why-card p { font-size: 0.82rem; color: var(--ink-muted); line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 32px;
+    text-align: center;
+    font-size: 0.8rem; color: var(--ink-muted);
+  }
+  footer strong { color: var(--ink); }
+
+  /* ── PRINT ── */
+  @media print {
+    nav, .hero, .template-grid, .tabs-wrap, .section-header, .why-section,
+    footer, .editor-form, .preview-toolbar, .editor-topbar, .editor-actions,
+    .tabs-wrap, #templates-section .section-header { display: none !important; }
+    #editor-section { display: block !important; padding: 0 !important; }
+    .editor-layout { display: block !important; }
+    .editor-preview { border: none !important; }
+    .doc-preview-wrap { background: #fff !important; padding: 0 !important; }
+    .doc-a4 { box-shadow: none !important; width: 100% !important; max-width: 100% !important; }
+    body { background: #fff !important; }
+  }
+
+  @media (max-width: 768px) {
+    .editor-layout { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Easy<span>Resume</span></div>
+  <div class="nav-links">
+    <a onclick="scrollToSection('#templates-section')">Templates</a>
+    <a onclick="scrollToSection('#why-section')">Why Us</a>
+    <button class="btn-primary" onclick="scrollToSection('#templates-section')">Get Started</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">⚡ No sign-up. No network. Just fast.</div>
+  <h1>Create Professional Documents <em>in Seconds</em></h1>
+  <p>Skip Canva's heavy load times. EasyResume runs instantly in your browser — zero uploads, zero waiting, zero fuss. Pick a template, fill it in, download.</p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="scrollToSection('#templates-section')" style="padding:12px 28px;font-size:0.95rem;">Browse Templates</button>
+    <button class="btn-outline" onclick="scrollToSection('#why-section')" style="padding:12px 24px;font-size:0.95rem;">Why EasyResume?</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Document Templates</div></div>
+    <div class="stat"><div class="stat-num">&lt;30s</div><div class="stat-label">Average Fill Time</div></div>
+    <div class="stat"><div class="stat-num">0KB</div><div class="stat-label">Data Uploaded</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Free Forever</div></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- TEMPLATES -->
+<section id="templates-section">
+  <div class="section-header">
+    <h2>Pick Your Document Type</h2>
+    <p>Resumes, Bio-datas, CV, Student profiles, Personal info sheets — all in one place.</p>
+  </div>
+
+  <div class="tabs-wrap">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="filterTab('all', this)">All</button>
+      <button class="tab-btn" onclick="filterTab('resume', this)">Resume</button>
+      <button class="tab-btn" onclick="filterTab('biodata', this)">Bio-Data</button>
+      <button class="tab-btn" onclick="filterTab('personal', this)">Personal Sheet</button>
+      <button class="tab-btn" onclick="filterTab('cv', this)">CV</button>
+      <button class="tab-btn" onclick="filterTab('student', this)">Student</button>
+    </div>
+  </div>
+
+  <div class="template-grid" id="templateGrid">
+
+    <!-- Resume Classic -->
+    <div class="template-card" data-type="resume" onclick="openEditor('classic')">
+      <div class="template-preview">
+        <div class="preview-header">
+          <div style="flex:1">
+            <div class="preview-line dark full" style="height:8px;margin-bottom:5px"></div>
+            <div class="preview-line short thin"></div>
+          </div>
+        </div>
+        <div class="preview-divider"></div>
+        <div class="preview-cols">
+          <div class="preview-col" style="flex:0 0 38%;border-right:1px solid #E5E5E5;padding-right:8px">
+            <div class="preview-section-title"></div>
+            <div class="preview-line thin full"></div>
+            <div class="preview-line thin med"></div>
+            <div class="preview-line thin short"></div>
+            <div style="margin-top:6px" class="preview-section-title"></div>
+            <div class="preview-line thin full"></div>
+            <div class="preview-line thin full"></div>
+            <div class="preview-line thin med"></div>
+          </div>
+          <div class="preview-col">
+            <div class="preview-section-title"></div>
+            <div class="preview-line thin full"></div>
+            <div class="preview-line thin full"></div>
+            <div class="preview-line thin med"></div>
+            <div style="margin-top:6px" class="preview-section-title"></div>
+            <div class="preview-line thin full"></div>
+            <div class="preview-line thin full"></div>
+          </div>
+        </div>
+      </div>
+      <div class="template-info">
+        <span class="template-name">Classic Resume</span>
+        <span class="template-tag">Resume</span>
+      </div>
+    </div>
+
+    <!-- Resume Modern Sidebar -->
+    <div class="template-card" data-type="resume" onclick="openEditor('modern')">
+      <div class="template-preview">
+        <div class="preview-sidebar" style="height:100%">
+          <div class="preview-left">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#667EEA,#764BA2);margin:0 auto 6px"></div>
+            <div class="preview-line white full thin"></div>
+            <div class="preview-line white med thin"></div>
+            <div style="margin-top:6px" class="preview-line white short" style="height:4px;opacity:0.4"></div>
+            <div class="preview-line white full thin"></div>
+            <div class="preview-line white full thin"></div>
+          </div>
+          <div class="preview-right">
+            <div class="preview-section-title"></div>
+            <div class="preview-line thin full"></div>
+            <div class="preview-line thin full"></div>
+            <div class="preview-line thin med"></div>
+            <div style="margin-top:6px" class="preview-section-title"></div>
+            <div class="preview-line thin full"></div>
+            <div class="preview-line thin full"></div>
+          </div>
+        </div>
+      </div>
+      <div class="template-info">
+        <span class="template-name">Modern Sidebar</span>
+        <span class="template-tag">Resume</span>
+      </div>
+    </div>
+
+    <!-- Resume Minimal -->
+    <div class="template-card" data-type="resume" onclick="openEditor('minimal')">
+      <div class="template-preview" style="padding:20px">
+        <div class="preview-line dark full" style="height:9px;margin-bottom:3px;width:60%"></div>
+        <div class="preview-line short thin"></div>
+        <div class="preview-line thin med" style="margin-top:3px"></div>
+        <div style="height:1px;background:#E5E5E5;margin:10px 0"></div>
+        <div class="preview-section-title"></div>
+        <div style="height:1px;background:#E5E5E5;margin:4px 0 7px"></div>
+        <div class="preview-line thin full"></div>
+        <div class="preview-line thin full"></div>
+        <div class="preview-line thin med"></div>
+        <div style="margin-top:8px" class="preview-section-title"></div>
+        <div style="height:1px;background:#E5E5E5;margin:4px 0 7px"></div>
+        <div class="preview-line thin full"></div>
+        <div class="preview-line thin med"></div>
+      </div>
+      <div class="template-info">
+        <span class="template-name">Minimal Clean</span>
+        <span class="template-tag">Resume</span>
+      </div>
+    </div>
+
+    <!-- Bio Data -->
+    <div class="template-card" data-type="biodata" onclick="openEditor('biodata')">
+      <div class="template-preview" style="padding:14px">
+        <div style="text-align:center;margin-bottom:8px">
+          <div style="height:7px;background:#374151;border-radius:3px;width:55%;margin:0 auto 3px"></div>
+          <div class="preview-line thin short" style="margin:0 auto;width:40%"></div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <div style="width:40px;height:50px;background:linear-gradient(135deg,#E0E7FF,#C7D2FE);border-radius:3px;flex-shrink:0"></div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:4px">
+            <div class="preview-line dark med" style="height:6px"></div>
+            <div class="preview-line thin full"></div>
+            <div class="preview-line thin full"></div>
+            <div class="preview-line thin med"></div>
+          </div>
+        </div>
+        <div style="margin-top:8px;display:flex;flex-direction:column;gap:3px">
+          <div style="height:5px;background:#F0F4FF;border-radius:2px;width:35%"></div>
+          <div class="preview-line thin full"></div>
+          <div class="preview-line thin full"></div>
+          <div class="preview-line thin med"></div>
+        </div>
+      </div>
+      <div class="template-info">
+        <span class="template-name">Bio Data</span>
+        <span class="template-tag tag-bio">Bio-Data</span>
+      </div>
+    </div>
+
+    <!-- Personal Info Sheet -->
+    <div class="template-card" data-type="personal" onclick="openEditor('personal')">
+      <div class="template-preview" style="padding:14px">
+        <div style="background:linear-gradient(135deg,#1A1A2E,#2D5BE3);padding:10px;border-radius:5px;display:flex;align-items:center;gap:8px;margin-bottom:10px">
+          <div style="width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.2)"></div>
+          <div>
+            <div style="height:6px;background:rgba(255,255,255,0.8);border-radius:3px;width:70px;margin-bottom:3px"></div>
+            <div style="height:4px;background:rgba(255,255,255,0.4);border-radius:2px;width:45px"></div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <div><div style="height:3px;background:#CCC;border-radius:2px;width:60%;margin-bottom:3px"></div><div style="height:5px;background:#374151;border-radius:2px;width:80%"></div></div>
+          <div><div style="height:3px;background:#CCC;border-radius:2px;width:60%;margin-bottom:3px"></div><div style="height:5px;background:#374151;border-radius:2px;width:80%"></div></div>
+          <div><div style="height:3px;background:#CCC;border-radius:2px;width:60%;margin-bottom:3px"></div><div style="height:5px;background:#374151;border-radius:2px;width:80%"></div></div>
+          <div><div style="height:3px;background:#CCC;border-radius:2px;width:60%;margin-bottom:3px"></div><div style="height:5px;background:#374151;border-radius:2px;width:80%"></div></div>
+        </div>
+      </div>
+      <div class="template-info">
+        <span class="template-name">Personal Info Sheet</span>
+        <span class="template-tag tag-personal">Personal</span>
+      </div>
+    </div>
+
+    <!-- CV -->
+    <div class="template-card" data-type="cv" onclick="openEditor('cv')">
+      <div class="template-preview" style="padding:16px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div>
+            <div style="height:8px;background:#374151;border-radius:3px;width:120px;margin-bottom:3px"></div>
+            <div class="preview-line thin" style="width:80px"></div>
+            <div class="preview-line accent thin" style="width:60px;margin-top:4px"></div>
+          </div>
+        </div>
+        <div style="height:1px;background:#E5E5E5;margin:8px 0"></div>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div><div class="preview-section-title" style="margin-bottom:3px"></div><div class="preview-line thin full"></div><div class="preview-line thin full"></div><div class="preview-line thin med"></div></div>
+          <div style="height:1px;background:#E5E5E5;margin:2px 0"></div>
+          <div><div class="preview-section-title" style="margin-bottom:3px"></div><div class="preview-line thin full"></div><div class="preview-line thin med"></div></div>
+        </div>
+      </div>
+      <div class="template-info">
+        <span class="template-name">Academic CV</span>
+        <span class="template-tag tag-cv">CV</span>
+      </div>
+    </div>
+
+    <!-- Student Profile -->
+    <div class="template-card" data-type="student" onclick="openEditor('student')">
+      <div class="template-preview" style="padding:14px">
+        <div style="background:linear-gradient(135deg,#F59E0B,#EF4444);padding:10px;border-radius:5px;margin-bottom:10px">
+          <div style="height:7px;background:rgba(255,255,255,0.9);border-radius:3px;width:70%;margin-bottom:3px"></div>
+          <div style="height:4px;background:rgba(255,255,255,0.5);border-radius:2px;width:50%"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div class="preview-line thin full"></div>
+          <div class="preview-line thin full"></div>
+          <div class="preview-line thin med"></div>
+          <div style="height:1px;background:#E5E5E5;margin:4px 0"></div>
+          <div class="preview-line thin full"></div>
+          <div class="preview-line thin full"></div>
+        </div>
+      </div>
+      <div class="template-info">
+        <span class="template-name">Student Profile</span>
+        <span class="template-tag tag-student">Student</span>
+      </div>
+    </div>
+
+    <!-- Fresher Resume -->
+    <div class="template-card" data-type="resume" onclick="openEditor('fresher')">
+      <div class="template-preview" style="padding:16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <div style="width:36px;height:36px;border-radius:6px;background:linear-gradient(135deg,#6EE7B7,#059669)"></div>
+          <div>
+            <div style="height:7px;background:#374151;border-radius:3px;width:90px;margin-bottom:3px"></div>
+            <div style="height:4px;background:#CCC;border-radius:2px;width:60px"></div>
+          </div>
+        </div>
+        <div style="height:1px;background:#E5E5E5;margin:6px 0"></div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div class="preview-line thin full"></div>
+          <div class="preview-line thin full"></div>
+          <div class="preview-line thin med"></div>
+          <div class="preview-line thin full"></div>
+          <div class="preview-line thin med"></div>
+        </div>
+      </div>
+      <div class="template-info">
+        <span class="template-name">Fresher Resume</span>
+        <span class="template-tag">Resume</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDITOR SECTION -->
+<div id="editor-section">
+  <div class="editor-topbar">
+    <div>
+      <h3 id="editor-title">Editing: Classic Resume</h3>
+      <p style="font-size:0.82rem;color:var(--ink-muted);margin-top:3px">Fill in your details — preview updates instantly</p>
+    </div>
+    <div class="editor-actions">
+      <button class="btn-outline" onclick="closeEditor()">← Back</button>
+      <button class="btn-outline" onclick="window.print()">🖨 Print</button>
+      <button class="btn-primary" onclick="downloadDoc()">↓ Download HTML</button>
+    </div>
+  </div>
+
+  <div class="editor-layout">
+    <div class="editor-form" id="editorForm"></div>
+    <div class="editor-preview">
+      <div class="preview-toolbar">
+        <span>Live Preview</span>
+        <div class="preview-toolbar-actions">
+          <button class="btn-outline" style="font-size:0.75rem;padding:4px 10px" onclick="window.print()">Print / Save PDF</button>
+        </div>
+      </div>
+      <div class="doc-preview-wrap">
+        <div class="doc-a4" id="docPreview"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY SECTION -->
+<section id="why-section">
+  <div class="section-header">
+    <h2>Why EasyResume?</h2>
+    <p>Built for speed, privacy, and simplicity.</p>
+  </div>
+  <div class="why-section" style="padding-top:0">
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">⚡</div><h4>Instant Load</h4><p>Pure HTML — no frameworks, no CDN bundles. Opens in under a second even on 2G.</p></div>
+      <div class="why-card"><div class="why-icon">🔒</div><h4>100% Private</h4><p>Nothing is uploaded anywhere. Your data never leaves your device.</p></div>
+      <div class="why-card"><div class="why-icon">📄</div><h4>Multiple Formats</h4><p>Resume, CV, Bio-data, Personal sheet, Student profile — all document types in one tool.</p></div>
+      <div class="why-card"><div class="why-icon">🖨</div><h4>Print-Ready</h4><p>One click to print or save as PDF. Clean, professional output every time.</p></div>
+      <div class="why-card"><div class="why-icon">✏️</div><h4>Fully Editable</h4><p>Click any template and start editing immediately. No account. No trial limit.</p></div>
+      <div class="why-card"><div class="why-icon">📶</div><h4>Low Data Usage</h4><p>Works offline once loaded. Perfect for low-bandwidth connections.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+<footer>
+  <strong>EasyResume</strong> — Create professional documents in seconds. · Made with ❤️ · Completely free, forever.
+</footer>
+
+<script>
+const templates = {
+  classic: {
+    title: 'Classic Resume',
+    fields: [
+      { section: 'Personal Info' },
+      { id:'name', label:'Full Name', type:'text', placeholder:'John Doe' },
+      { id:'jobtitle', label:'Job Title', type:'text', placeholder:'Software Engineer' },
+      { id:'email', label:'Email', type:'text', placeholder:'john@email.com' },
+      { id:'phone', label:'Phone', type:'text', placeholder:'+91 9000000000' },
+      { id:'location', label:'Location', type:'text', placeholder:'Chennai, India' },
+      { id:'linkedin', label:'LinkedIn / Portfolio', type:'text', placeholder:'linkedin.com/in/johndoe' },
+      { section: 'Summary' },
+      { id:'summary', label:'Professional Summary', type:'textarea', placeholder:'A results-driven professional with 3+ years...' },
+      { section: 'Experience' },
+      { id:'exp1title', label:'Job Title #1', type:'text', placeholder:'Frontend Developer' },
+      { id:'exp1company', label:'Company #1', type:'text', placeholder:'Tech Corp' },
+      { id:'exp1date', label:'Date Range', type:'text', placeholder:'Jan 2022 – Present' },
+      { id:'exp1desc', label:'Description', type:'textarea', placeholder:'Built responsive web apps...' },
+      { section: 'Education' },
+      { id:'edu1degree', label:'Degree', type:'text', placeholder:'B.Tech – Computer Science' },
+      { id:'edu1school', label:'Institution', type:'text', placeholder:'Anna University' },
+      { id:'edu1date', label:'Year', type:'text', placeholder:'2020 – 2024' },
+      { section: 'Skills' },
+      { id:'skills', label:'Skills (comma separated)', type:'textarea', placeholder:'HTML, CSS, JavaScript, React, Node.js' },
+      { id:'skill1', label:'Skill Bar 1', type:'text', placeholder:'JavaScript' },
+      { id:'skill1pct', label:'Skill 1 %', type:'text', placeholder:'85' },
+      { id:'skill2', label:'Skill Bar 2', type:'text', placeholder:'React' },
+      { id:'skill2pct', label:'Skill 2 %', type:'text', placeholder:'75' },
+      { id:'skill3', label:'Skill Bar 3', type:'text', placeholder:'Node.js' },
+      { id:'skill3pct', label:'Skill 3 %', type:'text', placeholder:'65' },
+    ],
+    defaults: {
+      name:'Alex Johnson', jobtitle:'Frontend Developer',
+      email:'alex@email.com', phone:'+91 98765 43210',
+      location:'Chennai, India', linkedin:'linkedin.com/in/alexj',
+      summary:'Passionate frontend developer with 2+ years of experience building clean and responsive web applications. Quick learner with strong problem-solving skills.',
+      exp1title:'Frontend Developer', exp1company:'StartupXYZ', exp1date:'Jan 2023 – Present',
+      exp1desc:'Developed responsive web apps using React and Tailwind CSS. Improved page load speed by 40%.',
+      edu1degree:'B.Tech – Computer Science', edu1school:'J.N.N Institute of Engineering', edu1date:'2020 – 2024',
+      skills:'HTML, CSS, JavaScript, React, Git, Figma',
+      skill1:'JavaScript', skill1pct:'85', skill2:'React', skill2pct:'75', skill3:'CSS', skill3pct:'90',
+    }
+  },
+  modern: {
+    title: 'Modern Sidebar Resume',
+    fields: [
+      { section: 'Personal Info' },
+      { id:'name', label:'Full Name', type:'text', placeholder:'Sarah Lee' },
+      { id:'jobtitle', label:'Job Title', type:'text', placeholder:'UI/UX Designer' },
+      { id:'email', label:'Email', type:'text', placeholder:'sarah@email.com' },
+      { id:'phone', label:'Phone', type:'text', placeholder:'+91 9000000000' },
+      { id:'location', label:'Location', type:'text', placeholder:'Bangalore, India' },
+      { section: 'About' },
+      { id:'about', label:'About Me', type:'textarea', placeholder:'Creative designer with 4 years...' },
+      { section: 'Experience' },
+      { id:'exp1title', label:'Role #1', type:'text', placeholder:'UX Designer' },
+      { id:'exp1company', label:'Company #1', type:'text', placeholder:'DesignHub' },
+      { id:'exp1date', label:'Date', type:'text', placeholder:'2022 – Present' },
+      { id:'exp1desc', label:'Description', type:'textarea', placeholder:'Led product redesign...' },
+      { id:'exp2title', label:'Role #2', type:'text', placeholder:'Junior Designer' },
+      { id:'exp2company', label:'Company #2', type:'text', placeholder:'Creative Agency' },
+      { id:'exp2date', label:'Date', type:'text', placeholder:'2020 – 2022' },
+      { section: 'Skills' },
+      { id:'skill1', label:'Skill 1', type:'text', placeholder:'Figma' },
+      { id:'skill1pct', label:'%', type:'text', placeholder:'90' },
+      { id:'skill2', label:'Skill 2', type:'text', placeholder:'Adobe XD' },
+      { id:'skill2pct', label:'%', type:'text', placeholder:'80' },
+      { id:'skill3', label:'Skill 3', type:'text', placeholder:'Prototyping' },
+      { id:'skill3pct', label:'%', type:'text', placeholder:'85' },
+      { section: 'Education' },
+      { id:'edu1degree', label:'Degree', type:'text', placeholder:'B.Des – UI/UX Design' },
+      { id:'edu1school', label:'Institution', type:'text', placeholder:'NID Ahmedabad' },
+      { id:'edu1date', label:'Year', type:'text', placeholder:'2016 – 2020' },
+    ],
+    defaults: {
+      name:'Sarah Lee', jobtitle:'UI/UX Designer',
+      email:'sarah@email.com', phone:'+91 87654 32109', location:'Bangalore, India',
+      about:'Creative UI/UX designer passionate about crafting intuitive digital experiences. 4 years of delivering user-centered designs.',
+      exp1title:'Senior UX Designer', exp1company:'DesignHub', exp1date:'2022 – Present', exp1desc:'Led redesign of core product, increasing user retention by 35%.',
+      exp2title:'Junior Designer', exp2company:'Creative Agency', exp2date:'2020 – 2022',
+      skill1:'Figma', skill1pct:'90', skill2:'Adobe XD', skill2pct:'80', skill3:'Prototyping', skill3pct:'85',
+      edu1degree:'B.Des – UI/UX Design', edu1school:'NID Ahmedabad', edu1date:'2016 – 2020',
+    }
+  },
+  minimal: {
+    title: 'Minimal Clean Resume',
+    fields: [
+      { section: 'Personal Info' },
+      { id:'name', label:'Full Name', type:'text', placeholder:'Kiran Patel' },
+      { id:'jobtitle', label:'Role', type:'text', placeholder:'Data Analyst' },
+      { id:'email', label:'Email', type:'text', placeholder:'kiran@email.com' },
+      { id:'phone', label:'Phone', type:'text', placeholder:'+91 9000000000' },
+      { id:'location', label:'Location', type:'text', placeholder:'Mumbai, India' },
+      { section: 'Objective' },
+      { id:'objective', label:'Career Objective', type:'textarea', placeholder:'To leverage data skills...' },
+      { section: 'Experience' },
+      { id:'exp1title', label:'Role', type:'text', placeholder:'Data Analyst' },
+      { id:'exp1company', label:'Company', type:'text', placeholder:'DataCorp' },
+      { id:'exp1date', label:'Duration', type:'text', placeholder:'2021 – Present' },
+      { id:'exp1desc', label:'Details', type:'textarea', placeholder:'Analyzed customer data...' },
+      { section: 'Education' },
+      { id:'edu1degree', label:'Degree', type:'text', placeholder:'B.Tech – AI & Data Science' },
+      { id:'edu1school', label:'Institution', type:'text', placeholder:'VNIT Nagpur' },
+      { id:'edu1date', label:'Year', type:'text', placeholder:'2019 – 2023' },
+      { section: 'Skills & Tools' },
+      { id:'skills', label:'Skills', type:'textarea', placeholder:'Python, SQL, Power BI, Excel, Tableau' },
+    ],
+    defaults: {
+      name:'Kiran Patel', jobtitle:'Data Analyst',
+      email:'kiran@email.com', phone:'+91 91234 56789', location:'Mumbai, India',
+      objective:'Detail-oriented data analyst skilled in Python and SQL. Seeking to contribute to data-driven decision making.',
+      exp1title:'Data Analyst', exp1company:'DataCorp', exp1date:'2023 – Present',
+      exp1desc:'Built dashboards in Power BI. Automated reporting pipelines using Python, saving 8 hours/week.',
+      edu1degree:'B.Tech – AI & Data Science', edu1school:'VNIT Nagpur', edu1date:'2019 – 2023',
+      skills:'Python, SQL, Power BI, Excel, Tableau, NumPy, Pandas',
+    }
+  },
+  biodata: {
+    title: 'Bio Data',
+    fields: [
+      { section: 'Personal Details' },
+      { id:'name', label:'Full Name', type:'text', placeholder:'Ravi Kumar' },
+      { id:'fathername', label:"Father's Name", type:'text', placeholder:'Suresh Kumar' },
+      { id:'mothername', label:"Mother's Name", type:'text', placeholder:'Anita Kumar' },
+      { id:'dob', label:'Date of Birth', type:'text', placeholder:'12 March 1998' },
+      { id:'gender', label:'Gender', type:'text', placeholder:'Male' },
+      { id:'religion', label:'Religion', type:'text', placeholder:'Hindu' },
+      { id:'caste', label:'Caste/Community', type:'text', placeholder:'OBC' },
+      { id:'marital', label:'Marital Status', type:'text', placeholder:'Single' },
+      { id:'nationality', label:'Nationality', type:'text', placeholder:'Indian' },
+      { id:'blood', label:'Blood Group', type:'text', placeholder:'O+' },
+      { id:'height', label:'Height', type:'text', placeholder:'5\'8"' },
+      { section: 'Contact Info' },
+      { id:'phone', label:'Mobile', type:'text', placeholder:'+91 9000000000' },
+      { id:'email', label:'Email', type:'text', placeholder:'ravi@email.com' },
+      { id:'address', label:'Address', type:'textarea', placeholder:'No. 12, Main St, Chennai – 600001' },
+      { section: 'Education' },
+      { id:'edu1', label:'Qualification 1', type:'text', placeholder:'B.Tech – Computer Science' },
+      { id:'edu1school', label:'Institution', type:'text', placeholder:'Anna University' },
+      { id:'edu2', label:'Qualification 2', type:'text', placeholder:'HSC – State Board' },
+      { id:'edu2school', label:'Institution', type:'text', placeholder:'Govt. Higher Secondary School' },
+      { section: 'Occupation' },
+      { id:'occupation', label:'Occupation', type:'text', placeholder:'Software Developer' },
+      { id:'company', label:'Organization', type:'text', placeholder:'Infosys, Chennai' },
+      { id:'income', label:'Annual Income', type:'text', placeholder:'₹4.5 LPA' },
+      { section: 'Family' },
+      { id:'siblings', label:'Siblings', type:'text', placeholder:'1 sister (married)' },
+      { id:'family_type', label:'Family Type', type:'text', placeholder:'Joint family' },
+    ],
+    defaults: {
+      name:'Ravi Kumar', fathername:'Suresh Kumar', mothername:'Anita Kumar',
+      dob:'12 March 1998', gender:'Male', religion:'Hindu', caste:'OBC',
+      marital:'Single', nationality:'Indian', blood:'O+', height:"5'8\"",
+      phone:'+91 9876543210', email:'ravi@email.com',
+      address:'No. 12, 2nd Cross Street, T. Nagar, Chennai – 600017',
+      edu1:'B.Tech – Computer Science', edu1school:'Anna University, Chennai',
+      edu2:'HSC – Computer Science', edu2school:'St. Joseph Higher Secondary School',
+      occupation:'Software Developer', company:'Tata Consultancy Services, Chennai',
+      income:'₹4.5 LPA', siblings:'1 younger sister', family_type:'Nuclear family',
+    }
+  },
+  personal: {
+    title: 'Personal Info Sheet',
+    fields: [
+      { section: 'Identity' },
+      { id:'name', label:'Full Name', type:'text', placeholder:'Priya Sharma' },
+      { id:'id_num', label:'Employee / Roll No.', type:'text', placeholder:'EMP-00142' },
+      { id:'dob', label:'Date of Birth', type:'text', placeholder:'05 July 2000' },
+      { id:'gender', label:'Gender', type:'text', placeholder:'Female' },
+      { id:'blood', label:'Blood Group', type:'text', placeholder:'B+' },
+      { id:'nationality', label:'Nationality', type:'text', placeholder:'Indian' },
+      { section: 'Contact' },
+      { id:'phone', label:'Mobile', type:'text', placeholder:'+91 9000000000' },
+      { id:'email', label:'Email', type:'text', placeholder:'priya@email.com' },
+      { id:'address', label:'Address', type:'textarea', placeholder:'123 Park Avenue, Coimbatore' },
+      { section: 'Emergency Contact' },
+      { id:'emergency_name', label:'Contact Name', type:'text', placeholder:'Rajesh Sharma (Father)' },
+      { id:'emergency_phone', label:'Contact Phone', type:'text', placeholder:'+91 9111111111' },
+      { section: 'Professional' },
+      { id:'department', label:'Department / Branch', type:'text', placeholder:'AI & Data Science' },
+      { id:'institution', label:'Institution / Company', type:'text', placeholder:'JNNCE, Chennai' },
+      { id:'joinyear', label:'Year of Joining', type:'text', placeholder:'2022' },
+    ],
+    defaults: {
+      name:'Priya Sharma', id_num:'EMP-00142',
+      dob:'05 July 2000', gender:'Female', blood:'B+', nationality:'Indian',
+      phone:'+91 90000 00000', email:'priya@email.com',
+      address:'123 Park Avenue, Coimbatore, Tamil Nadu – 641001',
+      emergency_name:'Rajesh Sharma (Father)', emergency_phone:'+91 9111111111',
+      department:'Artificial Intelligence & Data Science',
+      institution:'J.N.N Institute of Engineering, Chennai',
+      joinyear:'2022',
+    }
+  },
+  cv: {
+    title: 'Academic CV',
+    fields: [
+      { section: 'Personal Info' },
+      { id:'name', label:'Full Name', type:'text', placeholder:'Dr. Meera Iyer' },
+      { id:'jobtitle', label:'Academic Title', type:'text', placeholder:'Assistant Professor' },
+      { id:'email', label:'Email', type:'text', placeholder:'meera@edu.in' },
+      { id:'phone', label:'Phone', type:'text', placeholder:'+91 9000000000' },
+      { id:'location', label:'Location', type:'text', placeholder:'Chennai, India' },
+      { id:'researchgate', label:'ResearchGate / ORCID', type:'text', placeholder:'orcid.org/0000-...' },
+      { section: 'Research Interests' },
+      { id:'interests', label:'Research Areas', type:'textarea', placeholder:'Machine Learning, NLP, Computer Vision' },
+      { section: 'Education' },
+      { id:'edu1degree', label:'Degree 1', type:'text', placeholder:'Ph.D. – Computer Science' },
+      { id:'edu1school', label:'Institution 1', type:'text', placeholder:'IIT Madras' },
+      { id:'edu1date', label:'Year 1', type:'text', placeholder:'2015 – 2020' },
+      { id:'edu2degree', label:'Degree 2', type:'text', placeholder:'M.Tech – AI' },
+      { id:'edu2school', label:'Institution 2', type:'text', placeholder:'NIT Trichy' },
+      { id:'edu2date', label:'Year 2', type:'text', placeholder:'2013 – 2015' },
+      { section: 'Publications' },
+      { id:'pub1', label:'Publication 1', type:'textarea', placeholder:'Iyer M. et al., "Deep NLP Methods..." IEEE 2022' },
+      { id:'pub2', label:'Publication 2', type:'textarea', placeholder:'Iyer M., "Transfer Learning..." CVPR 2021' },
+      { section: 'Experience' },
+      { id:'exp1title', label:'Position', type:'text', placeholder:'Assistant Professor' },
+      { id:'exp1company', label:'Institution', type:'text', placeholder:'JNNCE' },
+      { id:'exp1date', label:'Duration', type:'text', placeholder:'2020 – Present' },
+    ],
+    defaults: {
+      name:'Dr. Meera Iyer', jobtitle:'Assistant Professor',
+      email:'meera.iyer@edu.in', phone:'+91 9876500000', location:'Chennai, India',
+      researchgate:'orcid.org/0000-0002-1234-5678',
+      interests:'Machine Learning, Natural Language Processing, Computer Vision, Deep Learning',
+      edu1degree:'Ph.D. – Computer Science', edu1school:'IIT Madras', edu1date:'2015 – 2020',
+      edu2degree:'M.Tech – Artificial Intelligence', edu2school:'NIT Trichy', edu2date:'2013 – 2015',
+      pub1:'Iyer M. et al., "Attention-based NLP for Tamil Text Classification," IEEE ICML 2022.',
+      pub2:'Iyer M., "Transfer Learning Approaches in Low-Resource Languages," CVPR Workshop 2021.',
+      exp1title:'Assistant Professor', exp1company:'J.N.N Institute of Engineering', exp1date:'2020 – Present',
+    }
+  },
+  student: {
+    title: 'Student Profile',
+    fields: [
+      { section: 'Basic Info' },
+      { id:'name', label:'Student Name', type:'text', placeholder:'Sam B.' },
+      { id:'rollno', label:'Roll No.', type:'text', placeholder:'22CS041' },
+      { id:'branch', label:'Branch', type:'text', placeholder:'AI & Data Science' },
+      { id:'year', label:'Year / Semester', type:'text', placeholder:'3rd Year – 5th Sem' },
+      { id:'college', label:'College', type:'text', placeholder:'J.N.N Institute of Engineering' },
+      { id:'dob', label:'Date of Birth', type:'text', placeholder:'09 May 2005' },
+      { section: 'Contact' },
+      { id:'phone', label:'Phone', type:'text', placeholder:'+91 9000000000' },
+      { id:'email', label:'Email', type:'text', placeholder:'sam@student.in' },
+      { section: 'Academic' },
+      { id:'cgpa', label:'CGPA / Percentage', type:'text', placeholder:'8.6 / 10' },
+      { id:'10th', label:'10th Marks', type:'text', placeholder:'94% – State Board' },
+      { id:'12th', label:'12th Marks', type:'text', placeholder:'88% – State Board' },
+      { section: 'Projects & Skills' },
+      { id:'project1', label:'Project 1', type:'text', placeholder:'AI-powered Resume Builder' },
+      { id:'project2', label:'Project 2', type:'text', placeholder:'StudyGrid Planner' },
+      { id:'skills', label:'Skills', type:'textarea', placeholder:'Python, HTML, CSS, JavaScript, React' },
+      { id:'achievements', label:'Achievements', type:'textarea', placeholder:'Hackathon 2nd place, Paper publication...' },
+    ],
+    defaults: {
+      name:'Sam Berchmans', rollno:'22AD041', branch:'Artificial Intelligence & Data Science',
+      year:'3rd Year – 5th Semester', college:'J.N.N Institute of Engineering, Chennai',
+      dob:'09 May 2005', phone:'+91 9000000000', email:'sam@student.in',
+      cgpa:'8.6 / 10', '10th':'94% – Tamil Nadu State Board', '12th':'88% – Tamil Nadu State Board',
+      project1:'AI-powered Resume Builder (HTML/CSS/JS)',
+      project2:'SkyDrive X — Browser-based Flying Car Game',
+      skills:'Python, HTML, CSS, JavaScript, React, Git, Figma',
+      achievements:'College Hackathon 2nd Place · GitHub contributor · 3 Web Projects Published',
+    }
+  },
+  fresher: {
+    title: 'Fresher Resume',
+    fields: [
+      { section: 'Personal Info' },
+      { id:'name', label:'Full Name', type:'text', placeholder:'Ananya Singh' },
+      { id:'jobtitle', label:'Applying For', type:'text', placeholder:'Junior Web Developer' },
+      { id:'email', label:'Email', type:'text', placeholder:'ananya@email.com' },
+      { id:'phone', label:'Phone', type:'text', placeholder:'+91 9000000000' },
+      { id:'location', label:'Location', type:'text', placeholder:'Delhi, India' },
+      { section: 'Career Objective' },
+      { id:'objective', label:'Objective', type:'textarea', placeholder:'Eager fresher seeking...' },
+      { section: 'Education' },
+      { id:'edu1degree', label:'Degree', type:'text', placeholder:'B.Tech – CS' },
+      { id:'edu1school', label:'College', type:'text', placeholder:'Delhi University' },
+      { id:'edu1date', label:'Year', type:'text', placeholder:'2020 – 2024' },
+      { id:'cgpa', label:'CGPA', type:'text', placeholder:'8.2 / 10' },
+      { section: 'Projects' },
+      { id:'proj1', label:'Project 1', type:'text', placeholder:'E-commerce Web App' },
+      { id:'proj1desc', label:'Description', type:'textarea', placeholder:'Built using React and Node.js...' },
+      { id:'proj2', label:'Project 2', type:'text', placeholder:'Weather Dashboard' },
+      { section: 'Skills' },
+      { id:'skills', label:'Technical Skills', type:'textarea', placeholder:'HTML, CSS, JavaScript, React, Python' },
+      { id:'soft', label:'Soft Skills', type:'textarea', placeholder:'Team player, Fast learner, Problem solver' },
+      { section: 'Certifications' },
+      { id:'cert1', label:'Certification', type:'text', placeholder:'AWS Cloud Practitioner – 2024' },
+    ],
+    defaults: {
+      name:'Ananya Singh', jobtitle:'Junior Web Developer',
+      email:'ananya@email.com', phone:'+91 9001234567', location:'Delhi, India',
+      objective:'A motivated CS fresher with strong web development skills, eager to contribute to real-world projects and grow with a dynamic team.',
+      edu1degree:'B.Tech – Computer Science', edu1school:'Delhi Technological University', edu1date:'2020 – 2024', cgpa:'8.2 / 10',
+      proj1:'E-commerce Web App', proj1desc:'Full-stack e-commerce platform built with React and Node.js. Includes cart, auth, and payment.',
+      proj2:'Weather Dashboard using OpenWeather API',
+      skills:'HTML, CSS, JavaScript, React, Node.js, Python, SQL, Git',
+      soft:'Team player, Quick learner, Creative thinker, Problem solver',
+      cert1:'AWS Cloud Practitioner Essentials – Coursera, 2024',
+    }
+  }
+};
+
+let currentTemplate = null;
+let formData = {};
+
+function scrollToSection(id) {
+  document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+function filterTab(type, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.template-card').forEach(card => {
+    card.style.display = (type === 'all' || card.dataset.type === type) ? 'block' : 'none';
+  });
+}
+
+function openEditor(templateKey) {
+  currentTemplate = templateKey;
+  const tmpl = templates[templateKey];
+  formData = { ...tmpl.defaults };
+  document.getElementById('editor-title').textContent = 'Editing: ' + tmpl.title;
+
+  const form = document.getElementById('editorForm');
+  form.innerHTML = '';
+
+  tmpl.fields.forEach(f => {
+    if (f.section) {
+      const div = document.createElement('div');
+      div.className = 'form-section-title';
+      div.textContent = f.section;
+      form.appendChild(div);
+      return;
+    }
+    const g = document.createElement('div');
+    g.className = 'form-group';
+    g.innerHTML = `<label>${f.label}</label>`;
+    let el;
+    if (f.type === 'textarea') {
+      el = document.createElement('textarea');
+      el.rows = 3;
+    } else {
+      el = document.createElement('input');
+      el.type = 'text';
+    }
+    el.placeholder = f.placeholder || '';
+    el.value = formData[f.id] || '';
+    el.oninput = (e) => { formData[f.id] = e.target.value; renderPreview(); };
+    g.appendChild(el);
+    form.appendChild(g);
+  });
+
+  document.getElementById('editor-section').classList.add('visible');
+  document.getElementById('editor-section').scrollIntoView({ behavior: 'smooth' });
+  renderPreview();
+}
+
+function closeEditor() {
+  document.getElementById('editor-section').classList.remove('visible');
+  document.getElementById('templates-section').scrollIntoView({ behavior: 'smooth' });
+}
+
+function g(id) { return formData[id] || ''; }
+
+function renderSkillBars(skills, isDark) {
+  let html = '<div class="r-skill-list">';
+  for (let i = 1; i <= 3; i++) {
+    const name = g('skill'+i); const pct = parseInt(g('skill'+i+'pct')) || 70;
+    if (name) html += `<div class="r-skill"><span class="r-skill-name">${name}</span><div class="r-skill-bar"><div class="r-skill-fill" style="width:${pct}%"></div></div></div>`;
+  }
+  return html + '</div>';
+}
+
+function renderTagSkills() {
+  return (g('skills') || '').split(',').filter(s=>s.trim()).map(s => `<span class="r-tag">${s.trim()}</span>`).join('');
+}
+
+function renderPreview() {
+  const preview = document.getElementById('docPreview');
+  preview.className = 'doc-a4';
+  let html = '';
+  const t = currentTemplate;
+
+  if (t === 'classic') {
+    html = `<div class="resume-classic">
+      <div class="resume-head">
+        <div class="r-name">${g('name') || 'Your Name'}</div>
+        <div class="r-title">${g('jobtitle') || 'Job Title'}</div>
+        <div class="r-contact">
+          ${g('email') ? `<span>✉ ${g('email')}</span>` : ''}
+          ${g('phone') ? `<span>📞 ${g('phone')}</span>` : ''}
+          ${g('location') ? `<span>📍 ${g('location')}</span>` : ''}
+          ${g('linkedin') ? `<span>🔗 ${g('linkedin')}</span>` : ''}
+        </div>
+      </div>
+      <div class="r-body">
+        <div class="r-left">
+          <div class="r-sec"><div class="r-sec-title">Skills</div>${renderSkillBars()}</div>
+          <div class="r-sec"><div class="r-sec-title">Technologies</div>${renderTagSkills()}</div>
+          <div class="r-sec"><div class="r-sec-title">Education</div>
+            <div class="r-item">
+              <div class="r-item-title">${g('edu1degree')}</div>
+              <div class="r-item-sub">${g('edu1school')}</div>
+              <div class="r-item-date">${g('edu1date')}</div>
+            </div>
+          </div>
+        </div>
+        <div class="r-right">
+          ${g('summary') ? `<div class="r-sec"><div class="r-sec-title">Summary</div><div class="r-item-desc">${g('summary')}</div></div>` : ''}
+          <div class="r-sec"><div class="r-sec-title">Experience</div>
+            <div class="r-item">
+              <div class="r-item-head"><span class="r-item-title">${g('exp1title')}</span><span class="r-item-date">${g('exp1date')}</span></div>
+              <div class="r-item-sub">${g('exp1company')}</div>
+              <div class="r-item-desc">${g('exp1desc')}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  } else if (t === 'modern') {
+    const initials = (g('name')||'?').split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
+    html = `<div class="resume-modern">
+      <div class="r-sidebar" style="min-height:420px">
+        <div class="r-side-col">
+          <div class="r-avatar">${initials}</div>
+          <div class="r-name">${g('name') || 'Your Name'}</div>
+          <div class="r-title">${g('jobtitle') || ''}</div>
+          <div class="r-sec"><div class="r-sec-title">Contact</div>
+            ${g('email') ? `<div class="r-contact-item">✉ ${g('email')}</div>` : ''}
+            ${g('phone') ? `<div class="r-contact-item">📞 ${g('phone')}</div>` : ''}
+            ${g('location') ? `<div class="r-contact-item">📍 ${g('location')}</div>` : ''}
+          </div>
+          <div class="r-sec"><div class="r-sec-title">Skills</div>${renderSkillBars(null, true)}</div>
+          <div class="r-sec"><div class="r-sec-title">Education</div>
+            <div class="r-item-title" style="color:#fff;font-size:8.5px">${g('edu1degree')}</div>
+            <div style="font-size:8px;color:rgba(255,255,255,0.6)">${g('edu1school')}</div>
+            <div style="font-size:7.5px;color:rgba(255,255,255,0.5)">${g('edu1date')}</div>
+          </div>
+        </div>
+        <div class="r-main-col">
+          ${g('about') ? `<div class="r-sec"><div class="r-sec-title-main">About Me</div><div class="r-item-desc">${g('about')}</div></div>` : ''}
+          <div class="r-sec"><div class="r-sec-title-main">Experience</div>
+            <div class="r-item">
+              <div class="r-item-head"><span class="r-item-title">${g('exp1title')}</span><span class="r-item-date">${g('exp1date')}</span></div>
+              <div class="r-item-sub">${g('exp1company')}</div>
+              <div class="r-item-desc">${g('exp1desc')}</div>
+            </div>
+            ${g('exp2title') ? `<div class="r-item"><div class="r-item-head"><span class="r-item-title">${g('exp2title')}</span><span class="r-item-date">${g('exp2date')}</span></div><div class="r-item-sub">${g('exp2company')}</div></div>` : ''}
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  } else if (t === 'minimal') {
+    html = `<div class="resume-minimal">
+      <div class="r-name">${g('name') || 'Your Name'}</div>
+      <div class="r-title">${g('jobtitle')}</div>
+      <div class="r-contact">
+        ${g('email') ? `<span>${g('email')}</span>` : ''}
+        ${g('phone') ? `<span>${g('phone')}</span>` : ''}
+        ${g('location') ? `<span>${g('location')}</span>` : ''}
+      </div>
+      <div class="r-sec-title">Objective</div><div class="r-line"></div>
+      <div class="r-item-desc" style="margin-bottom:10px">${g('objective')}</div>
+      <div class="r-sec-title">Experience</div><div class="r-line"></div>
+      <div class="r-item">
+        <div class="r-item-head"><span class="r-item-title">${g('exp1title')} — ${g('exp1company')}</span><span class="r-item-date">${g('exp1date')}</span></div>
+        <div class="r-item-desc">${g('exp1desc')}</div>
+      </div>
+      <div class="r-sec-title" style="margin-top:10px">Education</div><div class="r-line"></div>
+      <div class="r-item">
+        <div class="r-item-head"><span class="r-item-title">${g('edu1degree')}</span><span class="r-item-date">${g('edu1date')}</span></div>
+        <div class="r-item-sub">${g('edu1school')}</div>
+      </div>
+      <div class="r-sec-title" style="margin-top:10px">Skills</div><div class="r-line"></div>
+      <div>${renderTagSkills()}</div>
+    </div>`;
+
+  } else if (t === 'biodata') {
+    html = `<div class="biodata-doc">
+      <div class="bd-title">Bio Data</div>
+      <div class="bd-sub">Personal Information Form</div>
+      <div class="bd-photo-row">
+        <div class="bd-photo">Photo</div>
+        <div class="bd-name-block">
+          <div class="bd-name">${g('name') || 'Full Name'}</div>
+          <table><tbody>
+            <tr><td>Date of Birth</td><td>${g('dob')}</td></tr>
+            <tr><td>Gender</td><td>${g('gender')}</td></tr>
+            <tr><td>Blood Group</td><td>${g('blood')}</td></tr>
+            <tr><td>Marital Status</td><td>${g('marital')}</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+      <table><tbody>
+        <tr class="bd-section-head"><td colspan="2">Family Details</td></tr>
+        <tr><td>Father's Name</td><td>${g('fathername')}</td></tr>
+        <tr><td>Mother's Name</td><td>${g('mothername')}</td></tr>
+        <tr><td>Family Type</td><td>${g('family_type')}</td></tr>
+        <tr><td>Siblings</td><td>${g('siblings')}</td></tr>
+        <tr class="bd-section-head"><td colspan="2">Contact Information</td></tr>
+        <tr><td>Mobile</td><td>${g('phone')}</td></tr>
+        <tr><td>Email</td><td>${g('email')}</td></tr>
+        <tr><td>Address</td><td>${g('address')}</td></tr>
+        <tr class="bd-section-head"><td colspan="2">Education</td></tr>
+        <tr><td>${g('edu1')}</td><td>${g('edu1school')}</td></tr>
+        <tr><td>${g('edu2')}</td><td>${g('edu2school')}</td></tr>
+        <tr class="bd-section-head"><td colspan="2">Occupation</td></tr>
+        <tr><td>Occupation</td><td>${g('occupation')}</td></tr>
+        <tr><td>Organization</td><td>${g('company')}</td></tr>
+        <tr><td>Annual Income</td><td>${g('income')}</td></tr>
+        <tr class="bd-section-head"><td colspan="2">Other Details</td></tr>
+        <tr><td>Religion</td><td>${g('religion')}</td></tr>
+        <tr><td>Caste / Community</td><td>${g('caste')}</td></tr>
+        <tr><td>Nationality</td><td>${g('nationality')}</td></tr>
+        <tr><td>Height</td><td>${g('height')}</td></tr>
+      </tbody></table>
+    </div>`;
+
+  } else if (t === 'personal') {
+    const initials = (g('name')||'?').split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
+    html = `<div class="personal-doc">
+      <div class="pd-header">
+        <div class="pd-avatar">${initials}</div>
+        <div>
+          <div class="pd-name">${g('name') || 'Full Name'}</div>
+          <div class="pd-id">${g('id_num')}</div>
+        </div>
+      </div>
+      <div class="pd-grid">
+        <div class="pd-field"><div class="pd-label">Date of Birth</div><div class="pd-value">${g('dob')}</div></div>
+        <div class="pd-field"><div class="pd-label">Gender</div><div class="pd-value">${g('gender')}</div></div>
+        <div class="pd-field"><div class="pd-label">Blood Group</div><div class="pd-value">${g('blood')}</div></div>
+        <div class="pd-field"><div class="pd-label">Nationality</div><div class="pd-value">${g('nationality')}</div></div>
+        <div class="pd-field"><div class="pd-label">Mobile</div><div class="pd-value">${g('phone')}</div></div>
+        <div class="pd-field"><div class="pd-label">Email</div><div class="pd-value">${g('email')}</div></div>
+      </div>
+      <div class="pd-field" style="margin-bottom:10px"><div class="pd-label">Address</div><div class="pd-value">${g('address')}</div></div>
+      <div class="r-sec-title" style="font-size:7.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#888;border-bottom:1px solid #E5E5E5;padding-bottom:4px;margin-bottom:8px">Emergency Contact</div>
+      <div class="pd-grid">
+        <div class="pd-field"><div class="pd-label">Name</div><div class="pd-value">${g('emergency_name')}</div></div>
+        <div class="pd-field"><div class="pd-label">Phone</div><div class="pd-value">${g('emergency_phone')}</div></div>
+      </div>
+      <div class="r-sec-title" style="font-size:7.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#888;border-bottom:1px solid #E5E5E5;padding-bottom:4px;margin-bottom:8px;margin-top:10px">Professional Details</div>
+      <div class="pd-grid">
+        <div class="pd-field"><div class="pd-label">Department</div><div class="pd-value">${g('department')}</div></div>
+        <div class="pd-field"><div class="pd-label">Year of Joining</div><div class="pd-value">${g('joinyear')}</div></div>
+      </div>
+      <div class="pd-field"><div class="pd-label">Institution / Company</div><div class="pd-value">${g('institution')}</div></div>
+    </div>`;
+
+  } else if (t === 'cv') {
+    html = `<div style="padding:22px">
+      <div style="margin-bottom:14px">
+        <div style="font-family:'DM Serif Display',serif;font-size:20px;letter-spacing:-0.5px">${g('name') || 'Your Name'}</div>
+        <div style="font-size:10px;color:#555;margin-top:2px">${g('jobtitle')}</div>
+        <div style="font-size:8.5px;color:var(--accent);margin-top:3px">${g('researchgate')}</div>
+        <div style="display:flex;gap:14px;margin-top:6px;flex-wrap:wrap">
+          ${g('email') ? `<span style="font-size:8.5px;color:#666">✉ ${g('email')}</span>` : ''}
+          ${g('phone') ? `<span style="font-size:8.5px;color:#666">📞 ${g('phone')}</span>` : ''}
+          ${g('location') ? `<span style="font-size:8.5px;color:#666">📍 ${g('location')}</span>` : ''}
+        </div>
+      </div>
+      <div class="r-sec"><div class="r-sec-title">Research Interests</div><div class="r-item-desc">${g('interests')}</div></div>
+      <div class="r-sec"><div class="r-sec-title">Education</div>
+        <div class="r-item">
+          <div class="r-item-head"><span class="r-item-title">${g('edu1degree')}</span><span class="r-item-date">${g('edu1date')}</span></div>
+          <div class="r-item-sub">${g('edu1school')}</div>
+        </div>
+        <div class="r-item">
+          <div class="r-item-head"><span class="r-item-title">${g('edu2degree')}</span><span class="r-item-date">${g('edu2date')}</span></div>
+          <div class="r-item-sub">${g('edu2school')}</div>
+        </div>
+      </div>
+      <div class="r-sec"><div class="r-sec-title">Publications</div>
+        ${g('pub1') ? `<div class="r-item-desc" style="margin-bottom:5px">[1] ${g('pub1')}</div>` : ''}
+        ${g('pub2') ? `<div class="r-item-desc">[2] ${g('pub2')}</div>` : ''}
+      </div>
+      <div class="r-sec"><div class="r-sec-title">Experience</div>
+        <div class="r-item">
+          <div class="r-item-head"><span class="r-item-title">${g('exp1title')}</span><span class="r-item-date">${g('exp1date')}</span></div>
+          <div class="r-item-sub">${g('exp1company')}</div>
+        </div>
+      </div>
+    </div>`;
+
+  } else if (t === 'student') {
+    html = `<div style="padding:0;overflow:hidden">
+      <div style="background:linear-gradient(135deg,#F59E0B,#EF4444);padding:16px 20px;">
+        <div style="font-family:'DM Serif Display',serif;font-size:18px;color:#fff">${g('name') || 'Student Name'}</div>
+        <div style="font-size:8.5px;color:rgba(255,255,255,0.8)">${g('branch')} · ${g('year')}</div>
+      </div>
+      <div style="padding:16px 20px">
+        <div class="pd-grid" style="margin-bottom:10px">
+          <div class="pd-field"><div class="pd-label">Roll No.</div><div class="pd-value">${g('rollno')}</div></div>
+          <div class="pd-field"><div class="pd-label">CGPA</div><div class="pd-value">${g('cgpa')}</div></div>
+          <div class="pd-field"><div class="pd-label">Mobile</div><div class="pd-value">${g('phone')}</div></div>
+          <div class="pd-field"><div class="pd-label">Email</div><div class="pd-value">${g('email')}</div></div>
+        </div>
+        <div class="pd-field" style="margin-bottom:10px"><div class="pd-label">College</div><div class="pd-value">${g('college')}</div></div>
+        <div class="r-sec"><div class="r-sec-title">Academic Record</div>
+          <div style="display:flex;gap:16px"><div class="r-item-desc">10th: ${g('10th')}</div><div class="r-item-desc">12th: ${g('12th')}</div></div>
+        </div>
+        <div class="r-sec"><div class="r-sec-title">Projects</div>
+          <div class="r-item-desc">${g('project1')}</div>
+          <div class="r-item-desc">${g('project2')}</div>
+        </div>
+        <div class="r-sec"><div class="r-sec-title">Skills</div>${renderTagSkills()}</div>
+        ${g('achievements') ? `<div class="r-sec"><div class="r-sec-title">Achievements</div><div class="r-item-desc">${g('achievements')}</div></div>` : ''}
+      </div>
+    </div>`;
+
+  } else if (t === 'fresher') {
+    html = `<div style="padding:22px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+        <div style="width:46px;height:46px;border-radius:8px;background:linear-gradient(135deg,#6EE7B7,#059669);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:#fff;flex-shrink:0">${(g('name')||'?')[0]}</div>
+        <div>
+          <div style="font-family:'DM Serif Display',serif;font-size:18px;letter-spacing:-0.3px">${g('name') || 'Your Name'}</div>
+          <div style="font-size:9px;color:#555">${g('jobtitle')}</div>
+          <div style="display:flex;gap:10px;margin-top:3px;flex-wrap:wrap">
+            ${g('email') ? `<span style="font-size:8px;color:#888">${g('email')}</span>` : ''}
+            ${g('phone') ? `<span style="font-size:8px;color:#888">${g('phone')}</span>` : ''}
+            ${g('location') ? `<span style="font-size:8px;color:#888">${g('location')}</span>` : ''}
+          </div>
+        </div>
+      </div>
+      ${g('objective') ? `<div class="r-sec"><div class="r-sec-title">Career Objective</div><div class="r-item-desc">${g('objective')}</div></div>` : ''}
+      <div class="r-sec"><div class="r-sec-title">Education</div>
+        <div class="r-item">
+          <div class="r-item-head"><span class="r-item-title">${g('edu1degree')}</span><span class="r-item-date">${g('edu1date')}</span></div>
+          <div class="r-item-sub">${g('edu1school')} · CGPA: ${g('cgpa')}</div>
+        </div>
+      </div>
+      <div class="r-sec"><div class="r-sec-title">Projects</div>
+        <div class="r-item"><div class="r-item-title">${g('proj1')}</div><div class="r-item-desc">${g('proj1desc')}</div></div>
+        ${g('proj2') ? `<div class="r-item"><div class="r-item-title">${g('proj2')}</div></div>` : ''}
+      </div>
+      <div class="r-sec"><div class="r-sec-title">Technical Skills</div>${renderTagSkills()}</div>
+      ${g('soft') ? `<div class="r-sec"><div class="r-sec-title">Soft Skills</div><div class="r-item-desc">${g('soft')}</div></div>` : ''}
+      ${g('cert1') ? `<div class="r-sec"><div class="r-sec-title">Certifications</div><div class="r-item-desc">${g('cert1')}</div></div>` : ''}
+    </div>`;
+  }
+
+  preview.innerHTML = html;
+}
+
+function downloadDoc() {
+  const docHtml = document.getElementById('docPreview').outerHTML;
+  const fonts = `<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">`;
+  const styles = Array.from(document.styleSheets).map(s => { try { return Array.from(s.cssRules).map(r=>r.cssText).join('\n'); } catch(e){return '';} }).join('\n');
+  const full = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>EasyResume Document</title>${fonts}<style>${styles} body{background:#fff;display:flex;justify-content:center;padding:20px} .doc-a4{width:595px;box-shadow:none}</style></head><body>${docHtml}</body></html>`;
+  const blob = new Blob([full], {type:'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (g('name') || 'document').replace(/\s/g,'_') + '_EasyResume.html';
+  a.click();
+}
+</script>
+</body>
+</html>
